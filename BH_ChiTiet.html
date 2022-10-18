@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V&D | Website cung cấp các sản phẩm công nghệ</title>
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="stylesheet" href="css/styleCT.css">
+    <link rel="stylesheet" href="fontawesome-free-6.0.0-web/css/all.css">
+    <link rel="stylesheet" href="bootstrap-4.6.1-dist/css/bootstrap.min.css">
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="bootstrap-4.6.1-dist/js/bootstrap.min.js"></script>
+    <script>
+        let dssp = JSON.parse(localStorage.getItem("dssp"))
+        let masp = localStorage.getItem("masp");
+        let temp = dssp.find(sp => sp.masp == masp)
+        function hienThi(temp, dssp) {
+            img = "<div class='left-imgleft'>" +
+                "<img src='" + temp.hinhanh + "' alt='photo' class='border'> </div>" +
+                " <div class='left-imgright'>" +
+                "<img src='" + temp.hinhanh + "' alt='photo' class='border'>" +
+                "<img src='" + temp.hinhanh + "' alt='photo' class='border'>" +
+                "<img src='" + temp.hinhanh + "' alt='photo' class='border'>" +
+                "<img src='" + temp.hinhanh + "' alt='photo' class='border'></div>"
+            $("#myIMG").append(img);
+            $("#MyTen").append(temp.tensp)
+            $("#MyGia").append(dinhDangTienVN(temp.dongia) + " VNĐ")
+            $("#themVaoGH").append(" <button id='btnThem' onclick='chonsp(" + temp.masp + ")'>Thêm vào giỏ hàng<i class='fa-solid fa-cart-arrow-down'></i></button>")
+            let i = 0;
+            for (let len = 0; i < dssp.length; len++) {
+                if (dssp[len].maLoai == temp.maLoai && dssp[len].masp != temp.masp) {
+                    // alert(sp.maLoai)
+                    row = " <div class='item' style='padding-left: 0;'>" +
+                        "<a href='BH_ChiTiet.html'  onclick='setMaSP(" + dssp[len].masp + ")'><img src='" + dssp[len].hinhanh + "' alt='photo'    class='border'></a> " +
+                        "<h6>" + dssp[len].tensp + "</h6>" +
+                        "<p>" + dinhDangTienVN(dssp[len].dongia) + " VNĐ" + "<sup>đ</sup></p></div>"
+                    $("#myGopY").append(row);
+                    i++;
+                }
+                if (i == 4) {
+                    breakOut = true;
+                    return false;
+                }
+            }
+        }
+        function setMaSP(maSP) {
+            localStorage.setItem("masp", maSP);
+        }
+        function dinhDangTienVN(n) {
+            return "" + n.toFixed(0).replace(/./g, function (c, i, a) {
+                return i > 0 && c !== "." && (a.length - i) % 3 === 0 ? "," + c : c;
+            });
+        }
+        function chonsp(i) {
+            let kiemTraDN = localStorage.getItem("flag");
+            if(kiemTraDN.trim() == "false")  {
+                alert("Cần đăng nhập trước")
+                return;
+            }
+            let sL = $("#soLuong").val();
+            let dssp = JSON.parse(localStorage.getItem("dssp"))
+            let temp = dssp.find(sp => sp.masp == i)
+            let dsmasp = JSON.parse(localStorage.getItem("dsmasp"))
+            if (dsmasp == null) {
+                if (temp.soluong < parseInt(sL)) {
+                    alert("Chỉ còn " + temp.soluong)
+                    return;
+                }
+                let sp = { masp: i, soLuong: sL }
+                dsmasp = [sp]
+            } else {
+                let flag = false;
+                for (let index = 0; index < dsmasp.length; index++)
+                    if (dsmasp[index].masp == i) {
+                        let tong = parseInt(sL) + parseInt(dsmasp[index].soLuong)
+                        if (temp.soluong - parseInt(dsmasp[index].soLuong) == 0) {
+                            alert("Hết hàng")
+                            return;
+                        }
+                        if (temp.soluong < tong) {
+                            alert("Chỉ còn " + (temp.soluong - parseInt(dsmasp[index].soLuong)))
+                            return;
+                        }
+                        dsmasp[index].soLuong = tong;
+                        flag = true
+                    }
+                if (!flag) {
+                    let sp = { masp: i, soLuong: sL }
+                    dsmasp.push(sp)
+                }
+            }
+            localStorage.setItem("dsmasp", JSON.stringify(dsmasp));
+        }
+        window.onload = function () {
+            hienThi(temp, dssp)
+            let kiemTraDN = JSON.parse(localStorage.getItem("flag"));
+            if (kiemTraDN) {
+                document.querySelector("#khongDN").style.display = "none";
+                document.querySelector("#sauDN").style.display = "block";
+            }
+            $("#dangxuat").click(function(){
+                document.querySelector("#khongDN").style.display = "block";
+                document.querySelector("#sauDN").style.display = "none";
+                localStorage.setItem("flag",false)
+            })
+        }
+    </script>
+</head>
+<body>
+    <header id="khongDN">
+        <div class="grid">
+            <div class="header">
+                <div class="logo">
+                    <a href="index.html"><img src="img/logo.png" width="80%" height="80px" alt=""></a>
+                </div>
+                <div class="menu">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="BH_GT.html">Giới thiệu</a></li>
+                    <li><a href="BH_BH.html">Cửa hàng</a></li>
+                    <li><a href="TinTuc.html">Tin tức</a></li>
+                    <li><a href="LienHe.html">Liên hệ</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </div>
+                <div class="menu-right">
+                    <li><input type="text" placeholder="Tìm kiếm"> <i class="fa-solid fa-magnifying-glass"></i></li>
+                    <li class=" DKDN"><a href="DangNhap.html">Đăng nhập</a></li>
+                </div>
+            </div>
+        </div>
+    </header>
+    <header id="sauDN">
+        <div class="grid">
+            <div class="header">
+                <div class="logo">
+                    <a href="#"><img src="img/logo.png" width="80%" height="80px" alt=""></a>
+                </div>
+                <div class="menu">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="BH_GT.html">Giới thiệu</a></li>
+                    <li><a href="BH_BH.html">Cửa hàng</a></li>
+                    <li><a href="TinTuc.html">Tin tức</a></li>
+                    <li><a href="LienHe.html">Liên hệ</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </div>
+                <div class="menu-right">
+                    <li><input type="text" placeholder="Tìm kiếm"> <i class="fa-solid fa-magnifying-glass"></i></li>
+                    <li class="menuCap2">
+                        <a href="#"><i id="tk" class="fa-solid fa-circle-user"></i>Tài khoản</a>
+                        <ul class="nav">
+                            <li class="nav-item"><a href="#" class="nav-link">Thông tin tài khoản</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link">Thay đổi mật khẩu</a></li>
+                            <li class="nav-item" ><a href="#" class="nav-link" id="dangxuat">Đăng xuất</a></li>  
+                        </ul>
+                    </li>
+                    <li><a href="GioHang.html"><i class="fa-solid fa-cart-arrow-down"></i>Giỏ hàng </a></li>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="duongDan">
+        <div class="duongDan-content">
+            <div class="title">
+                <h1>Cửa Hàng</h1>
+            </div>
+            <div class="content" id="tieuDe">
+                <a href="index.html">Trang chủ / </a>
+                <p>Cửa hàng</p>
+            </div>
+        </div>
+    </div>
+    <section class="product">
+        <div class="grid row" style="margin: 0 auto;">
+            <div class="left row" id="myIMG">
+            </div>
+            <div class="right">
+                <div class="name">
+                    <h1 id="MyTen"></h1>
+                </div>
+                <div class="price">
+                    <p id="MyGia"> </p>
+                </div>
+                <div class="color">
+                    <p><span>Màu sắc:</span></p>
+                    <div class="nau">
+                        <input id="nau" type="radio" name="color" checked>
+                        <label for="nau" class=""><span>Bạc</span></label>
+                    </div>
+                    <div class="kem">
+                        <input id="kem" type="radio" name="color">
+                        <label for="kem" class="sd"> <span>Vàng</span></label>
+                    </div>
+                    <div class="den">
+                        <input id="den" type="radio" name="color">
+                        <label for="den" class=""> <span>Đen</span></label>
+                    </div>
+                </div>
+                <div class="size">
+                    <p><span>Dung lượng:</span></p>
+                    <div class="x">
+                        <input id="x" type="radio" name="size" checked>
+                        <label for="x" class=""><span>64GB</span></label>
+                    </div>
+                    <div class="m">
+                        <input id="m" type="radio" name="size">
+                        <label for="m" class="sd"> <span>128GB</span></label>
+                    </div>
+                    <div class="l">
+                        <input id="l" type="radio" name="size">
+                        <label for="l" class=""> <span>256GB</span></label>
+                    </div>
+                </div>
+                <div class="quantity">
+                    <p style="padding-right: 20px;"><span>Số lượng:</span></p>
+                    <input type="number" id="soLuong" min="0" value="1" class="sll">
+                </div>
+                <div class="add" id="themVaoGH">
+                </div>
+                <div class="bottom">
+                    <div class="bottom-top">
+                        &#8744;
+                    </div>
+                    <div class="bottom-center">
+                        <div class="title row ">
+                            <div class="title-item MT">
+                                <p>MÔ TẢ SẢN PHẨM</p>
+                            </div>
+                            <div class="title-item DT">
+                                <p>CHÍNH SÁCH ĐỔI TRẢ</p>
+                            </div>
+                            <div class="title-item GH">
+                                <p>CHÍNH SÁCH GIAO HÀNG</p>
+                            </div>
+                        </div>
+                        <div class="content">
+                            <div class="content-MT " style="font-size: 20px;">
+                                <p>
+                                    Màu sắc: Bạc/ Vàng/ Đen <br>
+                                    Dung lượng: 64GB giá 19999000k<br>
+                                    Dung lượng: 128GB giá 21999000k<br>
+                                    Dung lượng: 256GB giá 23999000k<br>
+                                </p>
+                            </div>
+                            <div class="content-DT" style="font-size: 20px;">
+                                Shop chấp nhận đổi/trả hàng trong thời gian 7 ngày làm việc, kể từ ngày bán.
+                            </div>
+                            <div class="content-GH" style="font-size: 20px;">
+                                Đơn hàng sẽ được giao cho Quý khách trong vòng 01 - 02 ngày làm việc kể từ ngày đặt đơn.
+                                Quý khách có thể liên hệ với V&D qua Email, Hotline, Facebook để được biết về lộ
+                                trình đơn hàng của mình
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="related">
+            <div class="grid">
+                <div class="related-top">
+                    <p>
+                        Có thể bạn sẽ thích
+                    </p>
+                </div>
+                <div class="row related-content" id="myGopY">
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+        <div class="grid">
+            <div class="grid__row">
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Giới thiệu</h3>
+                    <ul class="footer-list">
+                        <li>
+                            <p>Chào mừng đến Shop của <br>&hearts; V&D &hearts;</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Chăm sóc khách hàng</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Trung tâm trợ giúp</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Hướng dẫn mua hàng</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Giải đáp thắc mắc</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Menu</h3>
+                    <ul class="footer-list footer-list--menu">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Trang chủ</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Giới thiệu</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Cửa hàng</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Tin tức</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Liên hệ</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Sitemap</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Địa chỉ</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-location-dot"></i> 12 Nguyễn Văn Bảo, Phường 4, Q. Gò Vấp, Thành phố Hồ Chí Minh</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-phone"></i> 0363561805</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-envelope"></i>
+                                lecongvi18052002@gmail.com</a>
+                        </li>
+                        <li class="footer-item">
+                        </li>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Mạng xã hội</h3>
+                    <ul class="footer-list footer-list--MangXH">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-facebook"></i> Facebook</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-instagram-square"></i>
+                                Instagram</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-twitter"></i> Twitter</a>
+                        </li>
+
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-square-rss"></i> RSS</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-linkedin"></i> Linkedin</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="footer1">
+        <p>&#169; Create by Le Cong Vi and Pham Cong Danh</p>
+    </div>
+    <script src="js/jsCT.js"></script>
+</body>
+</html>

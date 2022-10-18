@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V&D | Website cung cấp các sản phẩm công nghệ</title>
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="stylesheet" href="css/styleBH.css">
+    <link rel="stylesheet" href="fontawesome-free-6.0.0-web/css/all.css">
+    <link rel="stylesheet" href="bootstrap-4.6.1-dist/css/bootstrap.min.css">
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="bootstrap-4.6.1-dist/js/bootstrap.min.js"></script>
+    <script>
+        let dssp = JSON.parse(localStorage.getItem("dssp"));
+        let dsLoaiSP = JSON.parse(localStorage.getItem("dsLoaiSP"));
+        let maL = JSON.parse(localStorage.getItem("maLoai"));
+        function napAllLoaiSP(dsLoaiSP) {
+            dsLoaiSP.forEach(loai => {
+                let row = "<li><a href='BH_BH.html' class='border' onclick='setMaLoaiSP(" + loai.maLoai + ")'>" + loai.tenLoai + "</a></li>"
+                $("#danhMucSP").append(row);
+            })
+        }
+        function napAllDSSP(dssp, chon) {
+            let j = Math.abs(chon * 12);
+            for (var i = (chon - 1) * 12; i < j; i++) {
+                let row = "<div class='sanPham'> " +
+                    "<a href='BH_ChiTiet.html'  onclick='setMaSP(" + dssp[i].masp + ")'> <img src='" + dssp[i].hinhanh + "' alt='photo' class='border' ></a> " +
+                    "<p>" + dssp[i].tensp + "</p>" +
+                    "<p>" + dssp[i].dongia + "đ</p>" +
+                    "</div> </div>"
+                $("#dsBanHang").append(row);
+            }
+        }
+        function setMaSP(maSP) {
+            localStorage.setItem("masp", maSP);
+        }
+        function hienThi(maLoai) {
+            document.getElementById("dsBanHang").innerHTML = "";
+            dssp.forEach(sp => {
+                if (maLoai == sp.maLoai) {
+                    let row = "<div class='sanPham'> " +
+                        "<a href='BH_ChiTiet.html'  onclick='setMaSP(" + sp.masp + ")'> <img src='" + sp.hinhanh + "' alt='photo' class='border' ></a> " +
+                        "<p>" + sp.tensp + "</p>" +
+                        "<p>" + sp.dongia + "đ</p>" +
+                        "</div> </div> "
+                    $("#dsBanHang").append(row);
+                }
+            })
+            tenLoai = "";
+            dsLoaiSP.forEach(sp => {
+                if (maLoai == sp.maLoai) {
+                    tenLoai = sp.tenLoai;
+                }
+            })
+            let s = "<p>/ " + tenLoai + "</p>"
+            $("#tieuDe").append(s);
+        }
+        function setMaLoaiSP(maLoai) {
+            localStorage.setItem("maLoai", maLoai)
+        }
+        function napSoTrang(chon) {
+            let soTrang
+            if (chon == 0)
+                soTrang = 1
+            else
+                soTrang = Math.ceil(dssp.length / 12);
+            $("#soTrang").append("<li onclick='chon(" + 1 + ")'><a href='#'><i class='fa fa-angle-left'></i></a></li>");
+            for (let i = 1; i <= soTrang; i++) {
+                let s = "";
+                if (i == chon) {
+                    s = "class='active'";
+                }
+                let temp = "<li " + s + " value='" + i + "' onclick='chon(" + i + ")'><a href='#' >" + i + "</a></li>"
+                $("#soTrang").append(temp);
+            }
+            $("#soTrang").append("<li onclick='chon(" + soTrang + ")'><a href='#'><i class='fa fa-angle-right'></i></a></li>");
+        }
+        function chon(i) {
+            $("#dsBanHang").html("");
+            $("#soTrang").html("");
+            napSoTrang(i);
+            napAllDSSP(dssp, i); 
+        }
+        window.onload = function () {
+            let kiemTraDN = JSON.parse(localStorage.getItem("flag"));
+            if (kiemTraDN) {
+                document.querySelector("#khongDN").style.display = "none";
+                document.querySelector("#sauDN").style.display = "block";
+            }
+            napAllLoaiSP(dsLoaiSP)
+            if (maL != null) {
+                hienThi(maL);
+                localStorage.removeItem("maLoai");
+                napSoTrang(0)
+            } else {
+                napAllDSSP(dssp, 1);
+                napSoTrang(1)
+            }
+            let kiemTra = JSON.parse(localStorage.getItem("flag"));
+            if (kiemTra) {
+                document.querySelector("#khongDN").style.display = "none";
+                document.querySelector("#sauDN").style.display = "block";
+            }
+            $("#dangxuat").click(function(){
+                document.querySelector("#khongDN").style.display = "block";
+                document.querySelector("#sauDN").style.display = "none";
+                localStorage.setItem("flag",false)
+            })
+        }
+    </script>
+</head>
+<body>
+    <header id="khongDN">
+        <div class="grid">
+            <div class="header">
+                <div class="logo">
+                    <a href="index.html"><img src="img/logo.png" width="80%" height="80px" alt=""></a>
+                </div>
+                <div class="menu">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="BH_GT.html">Giới thiệu</a></li>
+                    <li><a href="BH_BH.html">Cửa hàng</a></li>
+                    <li><a href="TinTuc.html">Tin tức</a></li>
+                    <li><a href="LienHe.html">Liên hệ</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </div>
+                <div class="menu-right">
+                    <li><input type="text" placeholder="Tìm kiếm"> <i class="fa-solid fa-magnifying-glass"></i></li>
+                    <li class=" DKDN"><a href="DangNhap.html">Đăng nhập</a></li>
+                </div>
+            </div>
+        </div>
+    </header>
+    <header id="sauDN">
+        <div class="grid">
+            <div class="header">
+                <div class="logo">
+                    <a href="#"><img src="img/logo.png" width="80%" height="80px" alt=""></a>
+                </div>
+                <div class="menu">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="BH_GT.html">Giới thiệu</a></li>
+                    <li><a href="BH_BH.html">Cửa hàng</a></li>
+                    <li><a href="TinTuc.html">Tin tức</a></li>
+                    <li><a href="LienHe.html">Liên hệ</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </div>
+                <div class="menu-right">
+                    <li><input type="text" placeholder="Tìm kiếm"> <i class="fa-solid fa-magnifying-glass"></i></li>
+                    <li class="menuCap2">
+                        <a href="#"><i id="tk" class="fa-solid fa-circle-user"></i>Tài khoản</a>
+                        <ul class="nav">
+                            <li class="nav-item"><a href="#" class="nav-link">Thông tin tài khoản</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link">Thay đổi mật khẩu</a></li>
+                            <li class="nav-item" ><a href="#" class="nav-link" id="dangxuat">Đăng xuất</a></li>  
+                        </ul>
+                    </li>
+                    <li><a href="GioHang.html"><i class="fa-solid fa-cart-arrow-down"></i>Giỏ hàng </a></li>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="duongDan">
+        <div class="duongDan-content">
+            <div class="title">
+                <h1>Cửa Hàng</h1>
+            </div>
+            <div class="content" id="tieuDe">
+                <a href="index.html">Trang chủ / </a>
+                <a href="BH_BH.html">Cửa hàng</a>
+            </div>
+        </div>
+    </div>
+    <section class="container">
+        <div class="container row_boLoc pl-0">
+            <div class="row">
+                <div class="boLoc">
+                    <label for="txtLoc" class="">Xem kết quả theo</label>
+                    <select id="txtLoc" class="" name="">
+                        <option>Thứ tự mặc định</option>
+                        <option value="giaTang">Giá tăng dần</option>
+                        <option value="giaGiam">Giá giảm dần</option>
+                        <option value="giaGiam">Từ A - Z</option>
+                        <option value="giaGiam">Từ Z - A</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <article class="art1 mt-2">
+            <h5>Danh mục sản phẩm</h5>
+            <ul class="mr-5 pl-0" id="danhMucSP" onclick="danhMucSP()">
+            </ul>
+        </article>
+        <article class="art2 mt-2 ml-5">
+            <div class="row" id="dsBanHang">
+            </div>
+            <div class="row">
+                <div class="pagination-nav text-center mtb_20">
+                </div>
+            </div>
+        </article>
+    </section>
+    <footer class="footer" style="margin-top: 50px;">
+        <div class="grid">
+            <div class="grid__row pt-3">
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Giới thiệu</h3>
+                    <ul class="footer-list">
+                        <li>
+                            <p>Chào mừng đến Shop của <br>&hearts; V&D &hearts;</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Chăm sóc khách hàng</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Trung tâm trợ giúp</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Hướng dẫn mua hàng</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Giải đáp thắc mắc</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Menu</h3>
+                    <ul class="footer-list footer-list--menu">
+                        <li class="footer-item">
+                            <a href="index.html" class="footer-item__link">Trang chủ</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="BH_GT.html" class="footer-item__link">Giới thiệu</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="BH_BH.html" class="footer-item__link">Cửa hàng</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="TinTuc.html" class="footer-item__link">Tin tức</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="LienHe.html" class="footer-item__link">Liên hệ</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="sitemap.html" class="footer-item__link">Sitemap</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Địa chỉ</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-location-dot"></i> 12 Nguyễn Văn
+                                Bảo, Phường 4, Gò Vấp, Thành phố Hồ Chí Minh, Việt Nam</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-phone"></i> 0363561805</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-envelope"></i>
+                                lecongvi18052002@gmail.com</a>
+                        </li>
+                        <li class="footer-item">
+                        </li>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Mạng xã hội</h3>
+                    <ul class="footer-list footer-list--MangXH">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-facebook"></i> Facebook</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-instagram-square"></i>
+                                Instagram</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-twitter"></i> Twitter</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-square-rss"></i> RSS</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-linkedin"></i> Linkedin</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="footer1">
+        <p>&#169;Create by Le Cong Vi and Pham Cong Danh</p>
+    </div>
+</body>
+</html>

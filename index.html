@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V&D | Website cung cấp các sản phẩm công nghệ</title>
+    <link rel="icon" type="image/png" href="img/logo.png">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="bootstrap-4.6.1-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="fontawesome-free-6.0.0-web/css/all.min.css">
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="bootstrap-4.6.1-dist/js/bootstrap.min.js"></script>
+    <script src="js/dataBanHang.js"></script>
+    <script src="js/dataTinTuc.js"></script>
+    <script src="js/Data_DKDN.js"></script>
+    <script>
+        window.onload = function () {
+            let kiemTraDN = JSON.parse(localStorage.getItem("flag"));
+            if (kiemTraDN) {
+                document.querySelector("#khongDN").style.display = "none";
+                document.querySelector("#sauDN").style.display = "block";
+            }
+            $("#dangxuat").click(function(){
+                document.querySelector("#khongDN").style.display = "block";
+                document.querySelector("#sauDN").style.display = "none";
+                localStorage.setItem("flag",false)
+            })
+        }
+    </script>
+</head>
+<body>
+    <header id="khongDN">
+        <div class="grid">
+            <div class="header">
+                <div class="logo">
+                    <a href="index.html"><img src="img/logo.png" width="80%" height="80px" alt=""></a>
+                </div>
+                <div class="menu">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="BH_GT.html">Giới thiệu</a></li>
+                    <li><a href="BH_BH.html">Cửa hàng</a></li>
+                    <li><a href="TinTuc.html">Tin tức</a></li>
+                    <li><a href="LienHe.html">Liên hệ</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </div>
+                <div class="menu-right">
+                    <li><input type="text" placeholder="Tìm kiếm"> <i class="fa-solid fa-magnifying-glass"></i></li>
+                    <li class=" DKDN"><a href="DangNhap.html">Đăng nhập</a></li>
+                </div>
+            </div>
+        </div>
+    </header>
+    <header id="sauDN">
+        <div class="grid">
+            <div class="header">
+                <div class="logo">
+                    <a href="#"><img src="img/logo.png" width="80%" height="80px" alt=""></a>
+                </div>
+                <div class="menu">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="BH_GT.html">Giới thiệu</a></li>
+                    <li><a href="BH_BH.html">Cửa hàng</a></li>
+                    <li><a href="TinTuc.html">Tin tức</a></li>
+                    <li><a href="LienHe.html">Liên hệ</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </div>
+                <div class="menu-right">
+                    <li><input type="text" placeholder="Tìm kiếm"> <i class="fa-solid fa-magnifying-glass"></i></li>
+                    <li class="menuCap2">
+                        <a href="#"><i id="tk" class="fa-solid fa-circle-user"></i>Tài khoản</a>
+                        <ul class="nav">
+                            <li class="nav-item"><a href="#" class="nav-link">Thông tin tài khoản</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link">Thay đổi mật khẩu</a></li>
+                            <li class="nav-item" ><a href="#" class="nav-link" id="dangxuat">Đăng xuất</a></li> 
+                        </ul>
+                    </li>
+                    <li><a href="GioHang.html"><i class="fa-solid fa-cart-arrow-down"></i>Giỏ hàng </a></li>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="section">
+        <div class="grid">
+            <div class="container">
+                <div style="margin-top: 300px; margin-left: 100px;">
+                    <h1> Xin chào, <span></span></h1>
+                    <h1>Đây là Shop của <span></span></h1>
+                    <h1> &hearts; V&D &hearts;<span></span></h1>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="grid">
+            <div class="noiBat">
+                <h1>Sản phẩm bán chạy</h1>
+                <div class="noiBat-content">
+                    <div class="noiBat-item">
+                        <div class="noiBat-img">
+                            <img src="img/ip14.jpg" alt="">
+                        </div>
+                        <div class="noiBat-text">
+                            <h3>Iphone 14 Pro Max 1TB</h3>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <p>
+                                Camera chính của iPhone 14 Pro Max được nâng cấp lên độ phân giải 48MP, so với mức 12MP của thế hệ trước. Ngoài ra, khả năng chụp đêm của cụm 3 camera sau sản phẩm này cũng được tăng lên 2-3 lần so với iPhone 13.
+                            </p>
+                            <button>Xem thêm</button>
+                        </div>
+                    </div>
+                    <div class="noiBat-item">
+                        <div class="noiBat-img">
+                            <img src="img/mac.jpg" alt="">
+                        </div>
+                        <div class="noiBat-text">
+                            <h3>Macbook M1</h3>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <p>
+                                Ngày từ khi những chiếc MacBook Air đầu tiên ra đời cho đến thời điểm hiện tại mình luôn đánh giá đây là một trong những dòng laptop đẹp và sang trọng nhất trên thị trường. 
+                            </p>
+                            <button>Xem thêm</button>
+                        </div>
+                    </div>
+                    <div class="noiBat-item">
+                        <div class="noiBat-img">
+                            <img src="img/smartwatch.jpg" alt="">
+                        </div>
+                        <div class="noiBat-text">
+                            <h3>Apple Watch</h3>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <p>
+                                Sản phẩm nổi tiếng ở trên thế giới và rất được yêu thích ở Việt Nam. Nếu bạn cũng đang muốn tìm hiểu về chiếc smartwatch đến từ thương hiệu nổi tiếng Apple, đừng bỏ qua bài viết giới thiệu Apple Watch là gì sau đây.
+                            </p>
+                            <button>Xem thêm</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="grid">
+            <div class="about">
+                <h1>
+                    About
+                </h1>
+                <div class="about-content ">
+                    <div class="about-content-left">
+                        <img src="img/about.jpg" alt="">
+                    </div>
+                    <div class="about-content-right">
+                        <h3>
+                            Tại sao nên chọn chúng tôi
+                        </h3>
+                        <button><a href="BH_GT.html">Tìm hiểu thêm</a></button>
+                        <div class="about-content-right-botom">
+                            <div class="item">
+                                <img src="img/24_7.jpg" alt="">
+                                <p>Dịch vụ tư vấn 24/7</p>
+                            </div>
+                            <div class="item">
+                                <img src="img/chinhHang.jpg" alt="">
+                                <p>Sản phẩm chính hãng</p>
+                            </div>
+                            <div class="item">
+                                <img src="img/daDang.jpg" alt="">
+                                <p>Đa dạng sản phẩm</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="grid">
+            <div class="camNhan">
+                <h1>Cảm nhận của khách hàng</h1>
+                <div class="camNhan-content">
+                    <div class="camNhan-item">
+                        <div class="camNhan-item-top">
+                            <img src="img/comment.png" alt="">
+                            <p> <span>&ldquo;</span> Sản phẩm mãi đỉnh. <br> Tuyệt vời ông mặt trời. <br> Rẻ quá
+                                Shop
+                                ơii..<span>&rdquo;</span></p>
+                        </div>
+                        <div class="camNhan-item-bottom">
+                            <div>
+
+                                <h4>Lê Công Vĩ</h4>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="camNhan-item">
+                        <div class="camNhan-item-top">
+                            <img src="img/comment.png" alt="">
+                            <p> <span>&ldquo;</span> Sản phẩm mãi đỉnh. <br> Tuyệt vời ông mặt trời. <br> Rẻ quá
+                                Shop
+                                ơii..<span>&rdquo;</span></p>
+                        </div>
+                        <div class="camNhan-item-bottom">
+                            <div>
+
+                                <h4>Phạm Công Danh</h4>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="camNhan-item">
+                        <div class="camNhan-item-top">
+                            <img src="img/comment.png" alt="">
+                            <p> <span>&ldquo;</span> Sản phẩm mãi đỉnh. <br>Tuyệt vời ông mặt trời. <br> Rẻ quá
+                                Shop
+                                ơii..<span>&rdquo;</span></p>
+                        </div>
+                        <div class="camNhan-item-bottom">
+                            <div>
+                                <h4>Lê Công Vĩ</h4>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="footer" style="margin-top: 50px;">
+        <div class="grid">
+            <div class="grid__row pt-3">
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Giới thiệu</h3>
+                    <ul class="footer-list">
+                        <li>
+                            <p>Chào mừng đến Shop của <br>&hearts; V&D &hearts;</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Chăm sóc khách hàng</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Trung tâm trợ giúp</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Hướng dẫn mua hàng</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Giải đáp thắc mắc</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Menu</h3>
+                    <ul class="footer-list footer-list--menu">
+                        <li class="footer-item">
+                            <a href="index.html" class="footer-item__link">Trang chủ</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="BH_GT.html" class="footer-item__link">Giới thiệu</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="BH_BH.html" class="footer-item__link">Cửa hàng</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="TinTuc.html" class="footer-item__link">Tin tức</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="LienHe.html" class="footer-item__link">Liên hệ</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="htmk/sitemap.html" class="footer-item__link">Sitemap</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Địa chỉ</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-location-dot"></i> 12 Nguyễn Văn
+                                Bảo, Phường 4, Gò Vấp, Thành phố Hồ Chí Minh, Việt Nam</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-phone"></i> 0363561805</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-envelope"></i>
+                                lecongvi18052002@gmail.com</a>
+                        </li>
+                        <li class="footer-item">
+                        </li>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Mạng xã hội</h3>
+                    <ul class="footer-list footer-list--MangXH">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-facebook"></i> Facebook</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-instagram-square"></i>
+                                Instagram</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-twitter"></i> Twitter</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-square-rss"></i> RSS</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-linkedin"></i> Linkedin</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="footer1">
+        <p>&#169; Create by Le Cong Vi and Pham Cong Danh   </p>
+    </div>
+    <script src="js/js.js"></script>
+</body>
+</html>

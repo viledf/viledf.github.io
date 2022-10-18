@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V&D | Website cung cấp các sản phẩm công nghệ</title>
+    <link rel="icon" type="image/png" href="img/imgThanhToan/icon-thanh-toan.jpg ">
+    <link rel="stylesheet" href="css/styleThanhToan.css">
+    <link rel="stylesheet" href="fontawesome-free-6.0.0-web/css/all.min.css">
+    <link rel="stylesheet" href="bootstrap-4.6.1-dist/css/bootstrapv3.css">
+    <link rel="stylesheet" href="bootstrap-4.6.1-dist/css/bootstrap.min.css">
+    <script src="js/jquery-3.6.0.js"></script>
+    <script src="bootstrap-4.6.1-dist/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <header id="khongDN">
+        <div class="grid">
+            <div class="header">
+                <div class="logo">
+                    <a href="index.html"><img src="img/logo.png" width="80%" height="80px" alt=""></a>
+                </div>
+                <div class="menu">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="BH_GT.html">Giới thiệu</a></li>
+                    <li><a href="BH_BH.html">Cửa hàng</a></li>
+                    <li><a href="TinTuc.html">Tin tức</a></li>
+                    <li><a href="LienHe.html">Liên hệ</a></li>
+                    <li><a href="sitemap.html">SiteMap</a></li>
+                </div>
+                <div class="menu-right">
+                    <li><input type="text" placeholder="Tìm kiếm"> <i class="fa-solid fa-magnifying-glass"></i></li>
+                    <li class=" DKDN"><a href="DangNhap.html">Đăng nhập / Đăng kí</a></li>
+                </div>
+            </div>
+        </div>
+    </header>
+    <header id="sauDN">
+        <div class="grid">
+            <div class="header">
+                <div class="logo">
+                    <a href="#"><img src="img/logo.png" width="80%" height="80px" alt=""></a>
+                </div>
+                <div class="menu">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="BH_GT.html">Giới thiệu</a></li>
+                    <li><a href="BH_BH.html">Cửa hàng</a></li>
+                    <li><a href="TinTuc.html">Tin tức</a></li>
+                    <li><a href="LienHe.html">Liên hệ</a></li>
+                    <li><a href="sitemap.html">SiteMap</a></li>
+                </div>
+                <div class="menu-right">
+                    <li><input type="text" placeholder="Tìm kiếm"> <i class="fa-solid fa-magnifying-glass"></i></li>
+                    <li class="menuCap2">
+                        <a href="#"><i id="tk" class="fa-solid fa-circle-user"></i>Tài khoản</a>
+                        <ul class="nav">
+                            <li class="nav-item"><a href="#" class="nav-link">Thông tin tài khoản</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link">Thay đổi mật khẩu</a></li>
+                            <li class="nav-item"><a href="#" class="nav-link" id="dangxuat">Đăng xuất</a></li>
+
+                        </ul>
+                    </li>
+                    <li><a href="GioHang.html"><i class="fa-solid fa-cart-arrow-down"></i>Giỏ hàng </a></li>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="duongDan">
+        <div class="duongDan-content">
+            <div class="title">
+                <h1>Thanh toán</h1>
+            </div>
+            <div class="content" id="tieuDe">
+                <a href="index.html">Trang chủ / </a>
+                <a href="GioHang.html"> Giỏ hàng / </a>
+                <a href="ThanhToan.html">Thanh toán </a>
+            </div>
+        </div>
+    </div>
+    <div class="container mt-5" onmousemove="tinhTien_TT()">
+        <div class="row margin-bottom-40">
+            <div class="col-md-12 col-sm-12">
+                <div class="panel-group accordion scrollable" id="page-Thanh-Toan">
+                    <div id="dia-Chi-Ship" class="panel panel-default">
+                        <a data-toggle="collapse" data-parent="#page-Thanh-Toan" href="#form-Dia-Chi">
+                            <div class="panel-heading">
+                                <h2 class="panel-title "> <img src="img/imgThanhToan/iconDiaChi.jpg" width="25"> Bước
+                                    1 :
+                                    Nhập địa chỉ nhận hàng
+                                </h2>
+                            </div>
+                        </a>
+
+                        <div id="form-Dia-Chi" class="panel-collapse collapse">
+                            <div class="panel-body row">
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group" onchange="kiemTraDC_HoTen()">
+                                        <label for="txt-Ho-Ten">Tên người nhận:<span class="error"
+                                                id="errorTen">*</span></label>
+                                        <input type="text" id="txt-Ho-Ten" class="form-control">
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="txt-email">E-Mail </label>
+                                        <input type="email" id="txt-email" class="form-control" required>
+                                    </div>
+
+                                    <div class="form-group" onchange="kiemTraDC_SoDT()">
+                                        <label for=" txt-So-DT">Số điện thoại <span class="error"
+                                                id="error-So-DT">*</span></label>
+                                        <input type="tel" id="txt-So-DT" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <label for="txt-Quoc-Gia">Quốc gia <span class="error"
+                                                id="error-Quoc-Gia">*</span></label>
+                                        <select class="form-control input-sm" id="txt-Quoc-Gia">
+                                            <option value="1"> Việt Nam</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group" onchange="kiemTraDC_ThanhPho()">
+                                        <label for="select-Thanh-Pho">Thành phố <span class="error"
+                                                id="error-Thanh-Pho">*</span></label>
+                                        <select class="form-control input-sm" id="select-Thanh-Pho">
+                                            <option hidden value="macDinh">--Vui lòng chọn thành phố--</option>
+                                            <option value="01">Hà Nội</option>
+                                            <option value="02">Hồ Chí Minh</option>
+                                            <option value="03">Hả Phòng</option>
+                                            <option value="04">Đà nẵng</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group" onchange="kiemTraDC_DCCT()">
+                                        <label for="txt-Dia-Chi-CT">Địa chỉ cụ thể: <span class="error"
+                                                id="error-Dia-Chi-CT">*</span></label>
+                                        <input type="text" id="txt-Dia-Chi-CT" class="form-control">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary pull-right" type="submit" id="btn-TiepTuc-DiaChi"
+                                        data-toggle="collapse" data-parent="#page-Thanh-Toan"
+                                        data-target="#from-PhuongThuc-VC" onmouseenter="kiemTra_submid_DC()">Tiếp
+                                        tục</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="shipping-method" class="panel panel-default">
+                        <div class="panel-heading">
+                            <a data-toggle="collapse" data-parent="#page-Thanh-Toan" href="#from-PhuongThuc-VC">
+                                <h2 class="panel-title">
+                                    <img src="img/imgThanhToan/icon-Van-Chuyen.jpg" width="25"> Bước 2 : Chọn phương
+                                    thức
+                                    vận chuyển
+                                </h2>
+                            </a>
+                        </div>
+                        <div id="from-PhuongThuc-VC" class="panel-collapse collapse">
+                            <div class="panel-body row">
+                                <div class="col-md-12">
+                                    <p><i>Vui lòng chọn đơn vị vận chuyển cho đơn hàng.<span class="error"
+                                                id="error-PT-GH">*</span></i>
+                                    </p>
+                                    <form class="radio-list">
+                                        <div>
+                                            <label for="giaoHoaToc">
+                                                <input type="radio" name="giao-Hang" id="giaoHoaToc">
+                                                <img width="25" src="img/imgThanhToan/icon-Ten-Lua-Giao-Hang.jpg"
+                                                    alt="img giao hàng hỏa tốc">
+                                                Giao hỏa tốc
+                                                <p><i>
+                                                        <p style="color: red;">Giá :99k</p>
+                                                        Nhận hàng vào 23 Th04 - 25 Th04<br>
+                                                        Cho phép Thanh toán khi nhận hàng<br>
+                                                        (Nhanh tay vào ngay "Voucher" để săn mã Miễn phí vận chuyển
+                                                        nhé!)<br>
+                                                    </i></p>
+                                            </label>
+                                        </div>
+                                        <span>
+                                            <label for="giaoNhanh">
+                                                <input type="radio" name="giao-Hang" id="giaoNhanh">
+                                                <img width="30" src="img/imgThanhToan/icon-Xe-May-Giao-Hang.jpg"
+                                                    alt="img giao hàng nhanh">
+                                                Giao nhanh
+                                                <p><i>
+                                                        <p style="color: red;">Giá :75k</p>
+                                                        Nhận hàng vào 23 Th04 - 25 Th04<br>
+                                                        Cho phép Thanh toán khi nhận hàng<br>
+                                                        (Nhanh tay vào ngay "Voucher" để săn mã Miễn phí vận chuyển
+                                                        nhé!)<br>
+                                                    </i></p>
+                                            </label>
+                                        </span>
+                                    </form>
+                                    <div class="form-group">
+                                        <label for="txt-GhiChu-GiaoHang">Ghi chú cho shiper: </label>
+                                        <textarea id="txt-GhiChu-GiaoHang" rows="3" class="form-control"></textarea>
+                                    </div>
+                                    <button class="btn btn-primary pull-right" type="submit" id="btn-TiepTuc-VanChuyen"
+                                        data-toggle="collapse" data-parent="#page-Thanh-Toan"
+                                        data-target="#from-PhuongThuc-TT" onmouseenter="kiemTra_submid_PTVVC()">Tiếp
+                                        tục</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="payment-method" class="panel panel-default">
+                        <div class="panel-heading">
+                            <a data-toggle="collapse" data-parent="#page-Thanh-Toan" href="#from-PhuongThuc-TT">
+                                <h2 class="panel-title">
+                                    <img src="img/imgThanhToan/icon-Phuong-Thuc-Thanh-Toan.png" width="25"> Bước 3 :
+                                    Chọn
+                                    phương thức thanh toán
+                                </h2>
+                            </a>
+                        </div>
+                        <div id="from-PhuongThuc-TT" class="panel-collapse collapse">
+                            <div class="panel-body row">
+                                <div class="col-md-12">
+                                    <p><i>Vui lòng chọn phương thức thanh toán.<span class="error" id="error-PT-TT">
+                                                *</span></i></p>
+                                    <div class="radio-list">
+                                        <label>
+                                            <input type="radio" name="Thanh-Toan" id="thanhToan-nhanHang">
+                                            <img src="img/imgThanhToan/icon-thanh-toan-nhan-HANG.png" width="32"
+                                                alt="icon-thanh-toan-khi-nhan-hang">
+                                            Thanh toán khi nhận hàng
+                                        </label><br>
+                                        <label>
+                                            <input type="radio" name="Thanh-Toan" id="thanhToan-Momo">
+                                            <img src="img/imgThanhToan/logo-momo.png" width="32" alt="icon-momo>">
+                                            Thanh toán bằng ví MoMo
+                                        </label><br>
+                                        <label>
+                                            <input type="radio" name="Thanh-Toan" id="thanhToan-Zalo">
+                                            <img src="img/imgThanhToan/logoZaloPay.png" width="32" alt="icon-zalo">
+                                            Thanh toán bằng ví ZaloPay
+                                        </label><br>
+                                        <label>
+                                            <input type="radio" name="Thanh-Toan" id="thanhToan-NH">
+                                            <img src="img/imgThanhToan/icon-theNganHang.jpg" width="32"
+                                                alt="icon-the-Ngan-Hang">
+                                            Thanh toán bằng thẻ ATM
+                                        </label><br>
+                                        <label>
+                                            <input type="radio" name="Thanh-Toan" id="thanhToan-GN">
+                                            <img src="img/imgThanhToan/icon-theGhiNo.jpg" width="32"
+                                                alt="icon-the-Ghi-No">
+                                            Thanh toán bằng thẻ Tín dụng/Ghi nợ
+                                        </label><br>
+                                    </div>
+                                    <!-- Do dùng class=pull-right => nút tiếp tục phải ghi trước -->
+                                    <div class="pull-right">
+                                        <button class="btn btn-primary " type="submit" id="btn-TiepTuc-TT"
+                                            data-toggle="collapse" data-parent="#page-Thanh-Toan"
+                                            data-target="#from-Xac-Nhan" onmouseenter="kiemTra_submid_PTTT()">Tiếp
+                                            tục</button>
+                                    </div>
+                                    <div class="checkbox pull-right">
+                                        <label>
+                                            <input type="checkbox" id="dieuKhoan-TT"
+                                                style="width: 15px;height: 15px;top: -4px;">
+                                            Tôi đã đọc và đồng ý với <a title="Điều khoản" href="#">Điều
+                                                khoản & Điều kiện</a> &nbsp;&nbsp;&nbsp;
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="xac-Nhan" class="panel panel-default">
+                        <div class="panel-heading">
+                            <a data-toggle="collapse" data-parent="#page-Thanh-Toan" href="#from-Xac-Nhan">
+                                <h2 class="panel-title">
+                                    <img src="img/imgThanhToan/icon-xac-nhan.jpg" width="25"> Bước 4 : Xác nhận đơn
+                                    hàng
+                                </h2>
+                            </a>
+                        </div>
+                        <div id="from-Xac-Nhan" class="panel-collapse collapse">
+                            <div class="panel-body row">
+                                <div class="col-md-12">
+                                    <div class="chi-Tiet-XNH">
+                                        <ul>
+                                            <li>
+                                                <em>Tổng tiền hàng </em>
+                                                <strong class="price" id="tongTienHang">0</strong>
+                                            </li>
+                                            <li>
+                                                <em id="">Phí bảo hiểm(1% tổng tiền hàng)</em>
+                                                <strong class="price" id="phiBaoHiem">0</strong>
+                                            </li>
+                                            <li>
+                                                <em>Phí vận chuyển</em>
+                                                <strong class="price" id="phiVanChuyen">Chưa chọn phương thức</strong>
+                                            </li>
+                                            <li>
+                                                <em>Mã giảm giá</em>
+                                                <strong class="price" id="phiGiamGia">0</strong>
+                                            </li>
+                                            <li class="checkout-total-price">
+                                                <em>Tổng thanh toán:</em>
+                                                <strong class="price" id="tongThanhToan"
+                                                    style="color: #e84d1c;font-weight: bold;"></strong>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <button class="btn btn-primary pull-right" type="submit"
+                                        id="btn-TiepTuc-XacNhan">ĐẶT HÀNG</button>
+                                    <a href="index.html"><button type="button"
+                                            class="btn btn-default pull-right btn-Huy">HỦY</button></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="footer-Cam">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 footer-Cam-khoi">
+                    <i class="fa free-Shipping"></i>
+                    <div>
+                        <h2>Free shipping</h2><br>
+                        <p>Chuyện gì khó có shipper.</p>
+                    </div>
+                    <span><img src="img/imgThanhToan/chuyen-phai.png" alt="ảnh sang phải"></span>
+                </div>
+                <div class="col-md-4 footer-Cam-khoi">
+                    <i class="fa tri-An-KH"></i>
+                    <div>
+                        <h2>Tặng voucher</h2><br>
+                        <p>Chúng tôi luôn dành khuyến mãi cho bạn.</p>
+                    </div>
+                    <span><img src="img/imgThanhToan/chuyen-phai.png" alt="ảnh sang phải"></span>
+                </div>
+                <div class="col-md-4 footer-Cam-khoi">
+                    <i class="fa lien-he-KH"></i>
+                    <div>
+                        <h2>0339717894</h2><br>
+                        <p>Liên hệ chăm sóc khách hàng 24/7</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <footer class="footer" style="margin-top: 50px;">
+        <div class="grid">
+            <div class="grid__row pt-3">
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Giới thiệu</h3>
+                    <ul class="footer-list">
+                        <li>
+                            <p>Chào mừng đến Shop của <br>&hearts; H3D &hearts;</p>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Chăm sóc khách hàng</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Trung tâm trợ giúp</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Hướng dẫn mua hàng</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link">Giải đáp thắc mắc</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Menu</h3>
+                    <ul class="footer-list footer-list--menu">
+                        <li class="footer-item">
+                            <a href="index.html" class="footer-item__link">Trang chủ</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="BH_GT.html" class="footer-item__link">Giới thiệu</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="BH_BH.html" class="footer-item__link">Cửa hàng</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="TinTuc.html" class="footer-item__link">Tin tức</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="LienHe.html" class="footer-item__link">Liên hệ</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="sitemap.html" class="footer-item__link">Sitemap</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Địa chỉ</h3>
+                    <ul class="footer-list">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-location-dot"></i> 12 Nguyễn Văn
+                                Bảo, Phường 4, Gò Vấp, Thành phố Hồ Chí Minh, Việt Nam</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-phone"></i> 0363561805</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-envelope"></i>
+                                lecongvi18052002@gmail.com</a>
+                        </li>
+                        <li class="footer-item">
+                        </li>
+                </div>
+                <div class="grid__column-2-4">
+                    <h3 class="footer__heading">Mạng xã hội</h3>
+                    <ul class="footer-list footer-list--MangXH">
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-facebook"></i> Facebook</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-instagram-square"></i>
+                                Instagram</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-twitter"></i> Twitter</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-solid fa-square-rss"></i> RSS</a>
+                        </li>
+                        <li class="footer-item">
+                            <a href="#" class="footer-item__link"><i class="fa-brands fa-linkedin"></i> Linkedin</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <div class="footer1">
+        <p>&#169; Create by Le Cong Vi and Pham Cong Danh</p>
+    </div>
+</body>
+<script src="js/js-Thanh-Toan.js"></script>
+</html>

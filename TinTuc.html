@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>V&D | Website cung cấp các sản phẩm công nghệ</title>
+  <link rel="icon" type="image/png" href="img/logo.png">
+  <link rel="stylesheet" href="fontawesome-free-6.0.0-web/css/all.min.css">
+  <link rel="stylesheet" type="text/css" href="bootstrap-4.6.1-dist/css/bootstrapv3.css">
+  <link rel="stylesheet" type="text/css" href="css/styleTinTuc.css">
+  <script>
+    let dsTH = JSON.parse(localStorage.getItem("dsThuongHieu"));
+    let dsTT = JSON.parse(localStorage.getItem("dsTinTuc"));
+    function napDSTH(dsTH) {
+      let i = 0;
+      dsTH.forEach(th => {
+        let row = "<li><a href='" + th.link + "'> " + (++i) + ". " + th.tenThuongHieu + " </a></li>"
+        $("#danhMucThuongHieu").append(row);
+      })
+    }
+    function napDSTT(dsTT, chon) {
+      let j = Math.abs(chon * 4);
+      for (var i = (chon - 1) * 4; i < j; i++) {
+        let row = "<div class='blog-item col-md-6 mb_30'>" +
+          "<div class='post-format'>" +
+          "<div class='thumb post-img'><a href='" + dsTT[i].link + "'>" +
+          "<img src='" + dsTT[i].hinhAnh + "' alt='anh minh họa'></a></div>" +
+          "<div class='post-type'><i class='fas fa-regular fa-info' aria-hidden='true'></i> </div>" +
+          "</div>" +
+          "<div class='post-info mtb_20'>" +
+          "<h3 class='mb_10'> <a href='" + dsTT[i].link + "'>" + dsTT[i].tieuDe + "</a></h3>" +
+          "<p>" + dsTT[i].noiDung + "</p>" +
+          "<div class='details mtb_20'>" +
+          "<div class='date pull-left'> <i class='fa-regular fa-calendar-days' aria-hidden='true'></i>" + " " + dsTT[i].ngaydang + "</div>" +
+          "<div class='more pull-right'> <a href=''>Chi tiết " +
+          "<i class='fa fa-arrow-circle-right' aria-hidden='true'></i></a></div>" +
+          "</div></div></div>"
+        $("#danhMucTinTuc").append(row);
+      }
+    }
+    function napSoTrang(chon) {
+      let soTrang = Math.ceil(dsTT.length / 4);
+
+      $("#soTrang").append("<li onclick='chon(" + 1 + ")'><a href='#'><i class='fa fa-angle-left'></i><i class='fa fa-angle-left'></i></a></li>");
+      for (let i = 1; i <= soTrang; i++) {
+        let s = "";
+        if (i == chon) {
+          s = "class='active'";
+        }
+        let temp = "<li " + s + " value='" + i + "' onclick='chon(" + i + ")'><a href='#' >" + i + "</a></li>"
+        $("#soTrang").append(temp);
+      }
+      $("#soTrang").append("<li onclick='chon(" + soTrang + ")'><a href='#'><i class='fa fa-angle-right'></i><i class='fa fa-angle-right'></i></a></li>");
+    }
+    function chon(i) {
+      $("#danhMucTinTuc").html("");
+      $("#soTrang").html("");
+      napSoTrang(i);
+      napDSTT(dsTT, i);  
+    }
+    window.onload = function () {
+      napDSTH(dsTH);  
+      napDSTT(dsTT, 1);  
+      napSoTrang(1);
+      let kiemTraDN = JSON.parse(localStorage.getItem("flag"));
+      if (kiemTraDN) {
+        document.querySelector("#khongDN").style.display = "none";
+        document.querySelector("#sauDN").style.display = "block";
+      }
+      $("#dangxuat").click(function () {
+        document.querySelector("#khongDN").style.display = "block";
+        document.querySelector("#sauDN").style.display = "none";
+        localStorage.setItem("flag", false)
+      })
+    }
+  </script>
+</head>
+<body>
+  <header id="khongDN">
+    <div class="grid">
+      <div class="header">
+        <div class="logo">
+          <a href="index.html"><img src="img/logo.png" width="80%" height="80px" alt=""></a>
+        </div>
+        <div class="menu">
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="BH_GT.html">Giới thiệu</a></li>
+          <li><a href="BH_BH.html">Cửa hàng</a></li>
+          <li><a href="TinTuc.html">Tin tức</a></li>
+          <li><a href="LienHe.html">Liên hệ</a></li>
+          <li><a href="sitemap.html">Sitemap</a></li>
+        </div>
+        <div class="menu-right">
+          <li><input type="text" placeholder="Tìm kiếm"> <i class="fa-solid fa-magnifying-glass"></i></li>
+          <li class=" DKDN"><a href="DangNhap.html">Đăng nhập</a></li>
+        </div>
+      </div>
+    </div>
+  </header>
+  <header id="sauDN">
+    <div class="grid">
+      <div class="header">
+        <div class="logo">
+          <a href="#"><img src="img/logo.png" width="80%" height="80px" alt=""></a>
+        </div>
+        <div class="menu">
+          <li><a href="index.html">Trang chủ</a></li>
+          <li><a href="BH_GT.html">Giới thiệu</a></li>
+          <li><a href="BH_BH.html">Cửa hàng</a></li>
+          <li><a href="TinTuc.html">Tin tức</a></li>
+          <li><a href="LienHe.html">Liên hệ</a></li>
+          <li><a href="sitemap.html">Sitemap</a></li>
+        </div>
+        <div class="menu-right">
+          <li><input type="text" placeholder="Tìm kiếm"> <i class="fa-solid fa-magnifying-glass"></i></li>
+          <li class="menuCap2">
+            <a href="#"><i id="tk" class="fa-solid fa-circle-user"></i>Tài khoản</a>
+            <ul class="nav">
+              <li class="nav-item"><a href="#" class="nav-link">Thông tin tài khoản</a></li>
+              <li class="nav-item"><a href="#" class="nav-link">Thay đổi mật khẩu</a></li>
+              <li class="nav-item"><a href="#" class="nav-link" id="dangxuat">Đăng xuất</a></li>
+            </ul>
+          </li>
+          <li><a href="GioHang.html"><i class="fa-solid fa-cart-arrow-down"></i>Giỏ hàng </a></li>
+        </div>
+      </div>
+    </div>
+  </header>
+  <div class="duongDan">
+    <div class="duongDan-content">
+      <div class="title">
+        <h1>Tin Tức</h1>
+      </div>
+      <div class="content">
+        <a href="index.html">Trang chủ / </a>
+        <p>Tin Tức</p>
+      </div>
+    </div>
+  </div>
+  <div class="container tinTuc">
+    <div class="row margin-bottom-40">
+      <div class="col-sm-12 col-sm-12 text-center" style="margin-top:30px ;">
+        <div>
+          <div id="column-left" class="col-sm-4 col-lg-3 hidden-xs">
+            <div id="category-menu" class="navbar collapse in mb_40" aria-expanded="true" role="button">
+              <div class="nav-responsive">
+                <div class="heading-part">
+                  <h2 class="main_title">CÁC THƯƠNG HIỆU ĐANG NỔI TIẾNG</h2>
+                </div>
+                <ul class="nav main-navigation collapse in" id="danhMucThuongHieu">
+                </ul>
+              </div>
+            </div>
+            <div class="left_banner left-sidebar-widget mb_40"> <a href="#"><img
+                  src="img/thuong-hieu-noi-tieng.webp" alt="" class="img-responsive" /></a> </div>
+            <div class="left-blog left-sidebar-widget ">
+              <div class="heading-part mb_20 ">
+                <h2 class="main_title">Bài đăng mới nhất</h2>
+              </div>
+              <div id="left-blog">
+                <div class="row ">
+                  <div class="blog-item mb_20">
+                    <div class="post-format col-xs-4">
+                      <div class="thumb post-img"><a href="https://sv.iuh.edu.vn/sinh-vien-dang-nhap.html"> <img
+                            src="img/smartwatch.jpg" alt="Tin tức mới nhất"></a></div>
+                    </div>
+                    <div class="post-info col-xs-8 ">
+                      <a href="https://sv.iuh.edu.vn/sinh-vien-dang-nhap.html">Apple Watch nổi tiếng trên toàn thế giới</a>
+                      <div class="date pull-left"> <i class="fa-regular fa-calendar-days" aria-hidden="true"></i>
+                        05-2022
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="row ">
+                  <div class="blog-item mb_20">
+                    <div class="post-format col-xs-4">
+                      <div class="thumb post-img"><a href="https://sv.iuh.edu.vn/sinh-vien-dang-nhap.html"> <img
+                            src="img/smartwatch.jpg" alt="Tin tức mới nhất"></a></div>
+                    </div>
+                    <div class="post-info col-xs-8 ">
+                      <a href="https://sv.iuh.edu.vn/sinh-vien-dang-nhap.html">Apple Watch nổi tiếng trên toàn thế giới</a>
+                      <div class="date pull-left"> <i class="fa-regular fa-calendar-days" aria-hidden="true"></i>
+                        06-2022
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-8 col-lg-9 mtb_20">
+          <div class="row">
+            <div class="three-col-blog text-left" id="danhMucTinTuc">
+            </div>
+          </div>
+          <div class="row">
+            <div class="pagination-nav text-center mtb_20">
+              <ul id="soTrang">
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <footer class="footer" style="margin-top: 50px;">
+    <div class="grid">
+      <div class="grid__row pt-3">
+        <div class="grid__column-2-4">
+          <h3 class="footer__heading">Giới thiệu</h3>
+          <ul class="footer-list">
+            <li>
+              <p>Chào mừng đến Shop của <br>&hearts; V&D &hearts;</p>
+            </li>
+          </ul>
+        </div>
+        <div class="grid__column-2-4">
+          <h3 class="footer__heading">Chăm sóc khách hàng</h3>
+          <ul class="footer-list">
+            <li class="footer-item">
+              <a href="#" class="footer-item__link">Trung tâm trợ giúp</a>
+            </li>
+            <li class="footer-item">
+              <a href="#" class="footer-item__link">Hướng dẫn mua hàng</a>
+            </li>
+            <li class="footer-item">
+              <a href="#" class="footer-item__link">Giải đáp thắc mắc</a>
+            </li>
+          </ul>
+        </div>
+        <div class="grid__column-2-4">
+          <h3 class="footer__heading">Menu</h3>
+          <ul class="footer-list footer-list--menu">
+            <li class="footer-item">
+              <a href="index.html" class="footer-item__link">Trang chủ</a>
+            </li>
+            <li class="footer-item">
+              <a href="BH_GT.html" class="footer-item__link">Giới thiệu</a>
+            </li>
+            <li class="footer-item">
+              <a href="BH_BH.html" class="footer-item__link">Cửa hàng</a>
+            </li>
+            <li class="footer-item">
+              <a href="TinTuc.html" class="footer-item__link">Tin tức</a>
+            </li>
+            <li class="footer-item">
+              <a href="LienHe.html" class="footer-item__link">Liên hệ</a>
+            </li>
+            <li class="footer-item">
+              <a href="sitemap.html" class="footer-item__link">Sitemap</a>
+            </li>
+          </ul>
+        </div>
+        <div class="grid__column-2-4">
+          <h3 class="footer__heading">Địa chỉ</h3>
+          <ul class="footer-list">
+            <li class="footer-item">
+              <a href="#" class="footer-item__link"><i class="fa-solid fa-location-dot"></i> 12 Nguyễn Văn Bảo, Phường
+                4, Gò Vấp, Thành phố Hồ Chí Minh, Việt Nam</a>
+            </li>
+            <li class="footer-item">
+              <a href="#" class="footer-item__link"><i class="fa-solid fa-phone"></i> 0363561805</a>
+            </li>
+            <li class="footer-item">
+              <a href="#" class="footer-item__link"><i class="fa-solid fa-envelope"></i>
+                lecongvi18052002@gmail.com</a>
+            </li>
+            <li class="footer-item">
+            </li>
+        </div>
+        <div class="grid__column-2-4">
+          <h3 class="footer__heading">Mạng xã hội</h3>
+          <ul class="footer-list footer-list--MangXH">
+            <li class="footer-item">
+              <a href="#" class="footer-item__link"><i class="fa-brands fa-facebook"></i> Facebook</a>
+            </li>
+            <li class="footer-item">
+              <a href="#" class="footer-item__link"><i class="fa-brands fa-instagram-square"></i>
+                Instagram</a>
+            </li>
+            <li class="footer-item">
+              <a href="#" class="footer-item__link"><i class="fa-brands fa-twitter"></i> Twitter</a>
+            </li>
+            <li class="footer-item">
+              <a href="#" class="footer-item__link"><i class="fa-solid fa-square-rss"></i> RSS</a>
+            </li>
+            <li class="footer-item">
+              <a href="#" class="footer-item__link"><i class="fa-brands fa-linkedin"></i> Linkedin</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+  <div class="footer1">
+    <p>&#169; Create by Le Cong Vi and Pham Cong Danh</p>
+  </div>
+  <script src="js/jquery-3.6.0.js"></script>
+  <script src="bootstrap-4.6.1-dist/js/bootstrap.min.js"></script>
+</body>
+</html>
